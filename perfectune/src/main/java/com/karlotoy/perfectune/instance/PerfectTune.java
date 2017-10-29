@@ -2,37 +2,54 @@ package com.karlotoy.perfectune.instance;
 
 import com.karlotoy.perfectune.thread.TuneThread;
 
-/**
- * Created by Nerubia on 2/20/2017.
- */
-
-public class PerfectTune {
+public class PerfectTune
+{
 
     private TuneThread tuneThread;
-    private double tuneFreq = 0f;
+    private double tuneFreq = 0;
+    private int volume;
 
-    public PerfectTune playTune(){
-        if(tuneThread == null){
+    public void playTune()
+    {
+        if (tuneThread == null)
+        {
             tuneThread = new TuneThread();
             tuneThread.setTuneFreq(tuneFreq);
+            tuneThread.setVolume(volume);
             tuneThread.start();
         }
-        return this;
     }
 
-    public void setTuneFreq(double tuneFreq) {
+    public void setTuneFreq(double tuneFreq)
+    {
         this.tuneFreq = tuneFreq;
-        if(tuneThread != null){
+        if (tuneThread != null)
             tuneThread.setTuneFreq(tuneFreq);
-        }
     }
 
-    public double getTuneFreq() {
+    public int getVolume()
+    {
+        if (tuneThread != null)
+            return tuneThread.getVolume();
+        return 0;
+    }
+
+    public void setVolume(int volume)
+    {
+        this.volume = volume;
+        if (tuneThread != null)
+            tuneThread.setVolume(volume);
+    }
+
+    public double getTuneFreq()
+    {
         return tuneFreq;
     }
 
-    public void stopTune(){
-        if(tuneThread != null){
+    public void stopTune()
+    {
+        if (tuneThread != null)
+        {
             tuneThread.stopTune();
             tuneThread = null;
         }
